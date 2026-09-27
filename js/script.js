@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initSmoothScroll();
   initLucideIcons();
+  initContactForm();
   reveal();
 });
 
@@ -119,7 +120,55 @@ function initSmoothScroll() {
 }
 
 /**
- * 4. Función reveal() reutilizable con IntersectionObserver (fade + slide-up + animación de barras)
+ * 4. Validación de formulario de contacto estático y notificación toast .glass
+ */
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  const toast = document.getElementById('toast');
+  if (!form || !toast) return;
+
+  let toastTimer = null;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('contact-name');
+    const emailInput = document.getElementById('contact-email');
+    const messageInput = document.getElementById('contact-message');
+
+    const nameVal = nameInput ? nameInput.value.trim() : '';
+    const emailVal = emailInput ? emailInput.value.trim() : '';
+    const messageVal = messageInput ? messageInput.value.trim() : '';
+
+    if (!nameVal || !emailVal || !messageVal) {
+      return;
+    }
+
+    // Limpiar formulario tras validación
+    form.reset();
+
+    // Mostrar toast .glass con animación fade+slide
+    if (toastTimer) {
+      clearTimeout(toastTimer);
+    }
+
+    toast.classList.remove('hidden');
+    // Forzar reflow para animación fluida en navegadores WebKit/Blink
+    void toast.offsetWidth;
+    toast.classList.add('show');
+
+    // Desvanecer tras 3.5 segundos
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 350);
+    }, 3500);
+  });
+}
+
+/**
+ * 5. Función reveal() reutilizable con IntersectionObserver (fade + slide-up + animación de barras)
  * Observa elementos con clase .reveal y activa .revealed al entrar en viewport
  */
 function reveal() {

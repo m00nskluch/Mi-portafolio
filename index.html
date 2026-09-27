@@ -504,15 +504,145 @@
     </div>
   </section>
 
-  <!-- Sección: #estudios -->
-  <section id="estudios">
-    <!-- Estructura inicial para estudios -->
+  <!-- 6. Sección: #estudios (Timeline vertical con línea --pastel y puntos .glass) -->
+  <section id="estudios" class="py-24 px-6 relative">
+    <div class="max-w-4xl mx-auto">
+      <!-- Encabezado de sección -->
+      <div class="text-center max-w-xl mx-auto mb-16 reveal">
+        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Estudios &amp; Logros</p>
+        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Hitos Académicos</h2>
+        <p class="text-ink-soft mt-3 text-base">Trayectoria formativa, reconocimientos y proyectos de investigación.</p>
+      </div>
+
+      <!-- Timeline vertical con línea en --pastel y puntos .glass -->
+      <div class="relative">
+        <!-- Línea vertical sólida en --pastel -->
+        <div class="absolute top-4 bottom-4 left-6 w-0.5 bg-pastel" aria-hidden="true"></div>
+
+        <div class="flex flex-col gap-10">
+          
+          <!-- Hito 1: 4° Año Medio — en curso -->
+          <div class="relative flex items-start pl-16 reveal" style="--stagger: 0">
+            <!-- Punto .glass -->
+            <div class="glass absolute left-6 top-6 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.7)] shadow-sm">
+              <div class="w-2.5 h-2.5 rounded-full bg-pastel-deep"></div>
+            </div>
+            <!-- Tarjeta .glass -->
+            <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 w-full shadow-sm">
+              <span class="inline-block text-xs font-bold uppercase tracking-wider text-pastel-deep mb-1">Educación Secundaria · 2026</span>
+              <h3 class="text-xl font-bold text-ink mb-2">4° Año Medio — en curso</h3>
+              <p class="text-ink-soft text-sm sm:text-base leading-relaxed">
+                Formación académica científico-humanista combinada con desarrollo autodidacta intensivo en programación fullstack, ingeniería de software y diseño UI/UX.
+              </p>
+            </div>
+          </div>
+
+          <!-- Hito 2: Finalista nacional, Samsung Solve for Tomorrow Chile -->
+          <div class="relative flex items-start pl-16 reveal" style="--stagger: 1">
+            <!-- Punto .glass -->
+            <div class="glass absolute left-6 top-6 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.7)] shadow-sm">
+              <div class="w-2.5 h-2.5 rounded-full bg-pastel-deep"></div>
+            </div>
+            <!-- Tarjeta .glass -->
+            <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 w-full shadow-sm">
+              <span class="inline-block text-xs font-bold uppercase tracking-wider text-pastel-deep mb-1">Innovación &amp; STEM</span>
+              <h3 class="text-xl font-bold text-ink mb-2">Finalista nacional, Samsung Solve for Tomorrow Chile</h3>
+              <p class="text-ink-soft text-sm sm:text-base leading-relaxed">
+                Seleccionado a nivel nacional junto a Zoe y Daniel gracias a un proyecto de mapeo sensorial enfocado en aportar soluciones prácticas mediante tecnología y prototipado colaborativo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Hito 3: Informe Ciencias para la Ciudadanía: nanoburbujas de gas -->
+          <div class="relative flex items-start pl-16 reveal" style="--stagger: 2">
+            <!-- Punto .glass -->
+            <div class="glass absolute left-6 top-6 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.7)] shadow-sm">
+              <div class="w-2.5 h-2.5 rounded-full bg-pastel-deep"></div>
+            </div>
+            <!-- Tarjeta .glass -->
+            <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 w-full shadow-sm">
+              <span class="inline-block text-xs font-bold uppercase tracking-wider text-pastel-deep mb-1">Divulgación Científica</span>
+              <h3 class="text-xl font-bold text-ink mb-2">Informe Ciencias para la Ciudadanía: nanoburbujas de gas</h3>
+              <p class="text-ink-soft text-sm sm:text-base leading-relaxed">
+                Investigación analítica y diseño de material de divulgación científica en torno a las propiedades y aplicaciones sustentables de nanoburbujas de gas en ecosistemas y tratamiento hídrico.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Sección: #contacto -->
-  <section id="contacto">
-    <!-- Estructura inicial para contacto -->
+  <!-- 7. Sección: #contacto -->
+  <section id="contacto" class="py-24 px-6 relative">
+    <div class="max-w-4xl mx-auto">
+      <!-- Encabezado de sección -->
+      <div class="text-center max-w-xl mx-auto mb-16 reveal">
+        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Contacto</p>
+        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Iniciemos una Conversación</h2>
+        <p class="text-ink-soft mt-3 text-base">¿Tienes un proyecto, propuesta o consulta? Envíame un mensaje directo.</p>
+      </div>
+
+      <!-- Formulario en tarjeta .glass -->
+      <div class="glass rounded-[var(--radius-lg)] p-8 sm:p-10 max-w-2xl mx-auto mb-12 shadow-sm reveal">
+        <form id="contact-form" class="flex flex-col gap-6" novalidate>
+          <!-- Nombre -->
+          <div>
+            <label for="contact-name" class="block text-sm font-semibold text-ink mb-2">Nombre completo</label>
+            <input type="text" id="contact-name" name="name" required placeholder="Tu nombre" class="glass-input">
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="contact-email" class="block text-sm font-semibold text-ink mb-2">Correo electrónico</label>
+            <input type="email" id="contact-email" name="email" required placeholder="tuemail@ejemplo.com" class="glass-input">
+          </div>
+
+          <!-- Mensaje -->
+          <div>
+            <label for="contact-message" class="block text-sm font-semibold text-ink mb-2">Mensaje</label>
+            <textarea id="contact-message" name="message" rows="4" required placeholder="Cuéntame sobre tu proyecto o consulta..." class="glass-input resize-y"></textarea>
+          </div>
+
+          <!-- Botón de envío Pill primario -->
+          <div class="pt-2">
+            <button type="submit" class="btn-pill btn-primary shadow-sm w-full sm:w-auto">
+              Enviar mensaje
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Fila de botones pill .glass para redes/contacto -->
+      <div class="flex flex-wrap items-center justify-center gap-4 max-w-xl mx-auto mb-16 reveal" style="--stagger: 1">
+        <a href="#" class="btn-pill glass text-sm font-medium gap-2">
+          <i data-lucide="github" class="w-4 h-4 text-pastel-deep"></i>
+          GitHub
+        </a>
+        <a href="#" class="btn-pill glass text-sm font-medium gap-2">
+          <i data-lucide="linkedin" class="w-4 h-4 text-pastel-deep"></i>
+          LinkedIn
+        </a>
+        <a href="#" class="btn-pill glass text-sm font-medium gap-2">
+          <i data-lucide="mail" class="w-4 h-4 text-pastel-deep"></i>
+          Email
+        </a>
+      </div>
+
+    </div>
   </section>
+
+  <!-- Toast flotante en acabado .glass con animación fade+slide -->
+  <div id="toast" class="toast-glass hidden fixed bottom-8 right-6 z-50 glass px-6 py-4 rounded-full flex items-center gap-3 shadow-xl border border-[rgba(255,255,255,0.7)] pointer-events-none" role="status" aria-live="polite">
+    <i data-lucide="check-circle-2" class="w-5 h-5 text-pastel-deep stroke-[2]"></i>
+    <span class="text-sm font-semibold text-ink">¡Gracias por escribirme!</span>
+  </div>
+
+  <!-- Footer simple -->
+  <footer class="py-8 border-t border-[rgba(29,29,31,0.08)] text-center text-sm text-ink-soft">
+    <p>© 2026 Jeshua Useche — Hecho con HTML, CSS, JS y Tailwind</p>
+  </footer>
 
   <!-- Script principal con defer -->
   <script src="js/script.js" defer></script>

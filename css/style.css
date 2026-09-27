@@ -220,6 +220,91 @@ body {
   line-height: 1.25;
 }
 
+/* Timeline para sección #estudios */
+.timeline-container {
+  position: relative;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px;
+  width: 2px;
+  background-color: var(--pastel);
+}
+
+@media (min-width: 768px) {
+  .timeline-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 24px;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .timeline-dot {
+    left: 50%;
+  }
+}
+
+.timeline-dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: var(--pastel-deep);
+}
+
+/* Inputs de formulario en acabado Liquid Glass */
+.glass-input {
+  width: 100%;
+  background: rgba(251, 249, 244, 0.75);
+  border: 1px solid rgba(29, 29, 31, 0.12);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background-color 0.2s var(--ease);
+  outline: none;
+}
+
+.glass-input:focus {
+  border-color: var(--pastel-deep);
+  box-shadow: 0 0 0 3px rgba(174, 203, 235, 0.35);
+  background: rgba(251, 249, 244, 0.95);
+}
+
+.glass-input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+
+/* Toast flotante con feedback de formulario */
+.toast-glass {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease-spring);
+  will-change: opacity, transform;
+}
+
+.toast-glass.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Respeto por preferencias de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   .blob,
@@ -227,7 +312,8 @@ body {
   .reveal,
   .skill-progress-bar,
   .project-card,
-  .interactive-card {
+  .interactive-card,
+  .toast-glass {
     animation: none !important;
     transition: none !important;
     transform: none !important;
