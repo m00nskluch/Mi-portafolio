@@ -184,7 +184,7 @@ body {
   will-change: width;
 }
 
-/* Microinteracciones para tarjetas */
+/* Microinteracciones para tarjetas generales */
 .interactive-card {
   transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
@@ -193,12 +193,41 @@ body {
   transform: scale(1.02);
 }
 
+/* Tarjetas de proyecto con hover translateY(-4px) y sombra suave */
+.project-card {
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+  will-change: transform, box-shadow;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(29, 29, 31, 0.08);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Chips de tecnología (pill outline --pastel-deep) */
+.chip-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--pastel-deep);
+  color: var(--pastel-deep);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background-color: transparent;
+  line-height: 1.25;
+}
+
 /* Respeto por preferencias de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   .blob,
   .hero-enter,
   .reveal,
-  .skill-progress-bar {
+  .skill-progress-bar,
+  .project-card,
+  .interactive-card {
     animation: none !important;
     transition: none !important;
     transform: none !important;
