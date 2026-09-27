@@ -4,8 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
   initMobileMenu();
   initSmoothScroll();
+  initLucideIcons();
   reveal();
 });
+
+/**
+ * Inicializa los iconos de Lucide vía CDN si están disponibles
+ */
+function initLucideIcons() {
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons();
+  }
+}
 
 /**
  * 1. Listener de scroll para compactar la barra de navegación fija (> 40px)
@@ -109,7 +119,7 @@ function initSmoothScroll() {
 }
 
 /**
- * 4. Función reveal() reutilizable con IntersectionObserver (fade + slide-up)
+ * 4. Función reveal() reutilizable con IntersectionObserver (fade + slide-up + animación de barras)
  * Observa elementos con clase .reveal y activa .revealed al entrar en viewport
  */
 function reveal() {
@@ -126,6 +136,14 @@ function reveal() {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
+
+        // Animar barras de progreso de habilidades contenidas
+        const progressBars = entry.target.querySelectorAll('.skill-progress-bar');
+        progressBars.forEach((bar) => {
+          const targetWidth = bar.getAttribute('data-width') || '0%';
+          bar.style.width = targetWidth;
+        });
+
         obs.unobserve(entry.target);
       }
     });

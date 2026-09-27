@@ -30,6 +30,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <!-- Estilos personalizados -->
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -108,9 +111,73 @@
     </div>
   </section>
 
-  <!-- Sección: #sobre-mi -->
-  <section id="sobre-mi">
-    <!-- Estructura inicial para sobre mí -->
+  <!-- 3. Sección: #sobre-mi -->
+  <section id="sobre-mi" class="py-24 px-6 relative">
+    <div class="max-w-6xl mx-auto">
+      <!-- Encabezado de sección -->
+      <div class="text-center max-w-xl mx-auto mb-16 reveal">
+        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Sobre mí</p>
+        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Trayectoria y Enfoque</h2>
+      </div>
+
+      <!-- Dos columnas: Avatar placeholder a la izquierda, narrativa a la derecha -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-16">
+        <!-- Columna Izquierda: Tarjeta .glass circular con iniciales "JU" sobre fondo --pastel -->
+        <div class="md:col-span-5 flex justify-center reveal" style="--stagger: 0">
+          <div class="glass w-60 h-60 sm:w-72 sm:h-72 rounded-full p-4 flex items-center justify-center shadow-lg relative">
+            <div class="w-full h-full rounded-full bg-pastel flex items-center justify-center border border-[rgba(255,255,255,0.6)] shadow-inner">
+              <span class="text-5xl sm:text-6xl font-[800] tracking-tighter text-ink select-none">JU</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Texto descriptivo -->
+        <div class="md:col-span-7 flex flex-col gap-4 text-base sm:text-lg text-ink-soft leading-relaxed reveal" style="--stagger: 1">
+          <p>
+            Soy estudiante de <strong class="font-semibold text-ink">4° Año Medio</strong> y <strong class="font-semibold text-ink">desarrollador junior fullstack</strong> (frontend, backend y diseño UI/UX), apasionado por construir aplicaciones digitales modernas, funcionales y visualmente armónicas.
+          </p>
+          <p>
+            En mi día a día trabajo con tecnologías de vanguardia como <span class="text-ink font-medium">Next.js, React, TypeScript, Tailwind CSS, SQLite, Turso, Drizzle ORM y Clerk</span>, cuidando la arquitectura, la persistencia y la seguridad del sistema.
+          </p>
+          <p>
+            Cofundé <span class="text-ink font-semibold">S&amp;M Network Company</span>, iniciativa con la que creamos sitios web y catálogos digitales orientados a impulsar la visibilidad y crecimiento de pequeños negocios locales.
+          </p>
+          <p>
+            Fui seleccionado a nivel nacional en <span class="text-ink font-semibold">Samsung Solve for Tomorrow Chile</span> gracias a un proyecto de mapeo sensorial enfocado en aportar soluciones prácticas mediante tecnología e innovación.
+          </p>
+          <p>
+            Desde los 12 años trabajé los fines de semana en un restaurante; esta etapa temprana me brindó una profunda disciplina, adaptabilidad y una sólida ética de trabajo en equipo.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3 tarjetas .glass pequeñas con métricas/números en --pastel-deep -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 flex flex-col justify-between reveal" style="--stagger: 2">
+          <span class="text-4xl sm:text-5xl font-[800] text-pastel-deep tracking-tight mb-2">2+</span>
+          <div>
+            <h3 class="font-bold text-ink text-base">Años programando</h3>
+            <p class="text-xs sm:text-sm text-ink-soft mt-1 leading-relaxed">Formación autodidacta y proyectos prácticos continuos.</p>
+          </div>
+        </div>
+
+        <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 flex flex-col justify-between reveal" style="--stagger: 3">
+          <span class="text-4xl sm:text-5xl font-[800] text-pastel-deep tracking-tight mb-2">12+</span>
+          <div>
+            <h3 class="font-bold text-ink text-base">Proyectos desarrollados</h3>
+            <p class="text-xs sm:text-sm text-ink-soft mt-1 leading-relaxed">Soluciones web, catálogos interactivos y prototipos funcionales.</p>
+          </div>
+        </div>
+
+        <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 flex flex-col justify-between reveal" style="--stagger: 4">
+          <span class="text-4xl sm:text-5xl font-[800] text-pastel-deep tracking-tight mb-2">15+</span>
+          <div>
+            <h3 class="font-bold text-ink text-base">Herramientas dominadas</h3>
+            <p class="text-xs sm:text-sm text-ink-soft mt-1 leading-relaxed">Librerías, frameworks, bases de datos y entornos de desarrollo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Sección: #proyectos -->
@@ -118,9 +185,225 @@
     <!-- Estructura inicial para proyectos -->
   </section>
 
-  <!-- Sección: #habilidades -->
-  <section id="habilidades">
-    <!-- Estructura inicial para habilidades -->
+  <!-- 4. Sección: #habilidades -->
+  <section id="habilidades" class="py-24 px-6 relative">
+    <div class="max-w-6xl mx-auto">
+      <!-- Encabezado de sección -->
+      <div class="text-center max-w-xl mx-auto mb-16 reveal">
+        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Habilidades</p>
+        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Ecosistema Técnico</h2>
+        <p class="text-ink-soft mt-3 text-base">Competencias organizadas por dominio con indicadores de familiaridad práctica.</p>
+      </div>
+
+      <!-- Grid de tarjetas bone-soft agrupadas en 3 categorías con stagger -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Categoría 1: Frontend -->
+        <div class="bg-bone-soft rounded-[var(--radius-lg)] p-8 border border-[rgba(255,255,255,0.7)] shadow-sm interactive-card flex flex-col justify-between reveal" style="--stagger: 0">
+          <div>
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[rgba(29,29,31,0.06)]">
+              <i data-lucide="layout" class="w-6 h-6 text-pastel-deep stroke-[1.8]"></i>
+              <h3 class="text-xl font-bold text-ink tracking-tight">Frontend</h3>
+            </div>
+
+            <div class="flex flex-col gap-5">
+              <!-- React -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="atom" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    React
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">88%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="88%"></div>
+                </div>
+              </div>
+
+              <!-- Next.js -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="globe" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Next.js
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">85%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="85%"></div>
+                </div>
+              </div>
+
+              <!-- TypeScript -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="file-code" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    TypeScript
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">80%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="80%"></div>
+                </div>
+              </div>
+
+              <!-- Tailwind CSS -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="palette" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Tailwind CSS
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">92%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="92%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría 2: Backend & Datos -->
+        <div class="bg-bone-soft rounded-[var(--radius-lg)] p-8 border border-[rgba(255,255,255,0.7)] shadow-sm interactive-card flex flex-col justify-between reveal" style="--stagger: 1">
+          <div>
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[rgba(29,29,31,0.06)]">
+              <i data-lucide="database" class="w-6 h-6 text-pastel-deep stroke-[1.8]"></i>
+              <h3 class="text-xl font-bold text-ink tracking-tight">Backend &amp; Datos</h3>
+            </div>
+
+            <div class="flex flex-col gap-5">
+              <!-- Node.js -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="server" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Node.js
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">78%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="78%"></div>
+                </div>
+              </div>
+
+              <!-- SQLite -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="database" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    SQLite
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">82%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="82%"></div>
+                </div>
+              </div>
+
+              <!-- Turso -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="hard-drive" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Turso
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">80%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="80%"></div>
+                </div>
+              </div>
+
+              <!-- Drizzle ORM -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="layers" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Drizzle ORM
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">82%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="82%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría 3: Herramientas -->
+        <div class="bg-bone-soft rounded-[var(--radius-lg)] p-8 border border-[rgba(255,255,255,0.7)] shadow-sm interactive-card flex flex-col justify-between reveal" style="--stagger: 2">
+          <div>
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[rgba(29,29,31,0.06)]">
+              <i data-lucide="wrench" class="w-6 h-6 text-pastel-deep stroke-[1.8]"></i>
+              <h3 class="text-xl font-bold text-ink tracking-tight">Herramientas</h3>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <!-- Clerk -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Clerk
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">85%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="85%"></div>
+                </div>
+              </div>
+
+              <!-- Git & GitHub -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="git-branch" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Git / GitHub
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">88%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="88%"></div>
+                </div>
+              </div>
+
+              <!-- Google Antigravity IDE -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Google Antigravity IDE
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">90%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="90%"></div>
+                </div>
+              </div>
+
+              <!-- Google AI Studio -->
+              <div>
+                <div class="flex items-center justify-between text-sm mb-1.5">
+                  <span class="flex items-center gap-2 font-medium text-ink">
+                    <i data-lucide="cpu" class="w-4 h-4 text-pastel-deep stroke-[1.8]"></i>
+                    Google AI Studio
+                  </span>
+                  <span class="text-xs font-semibold text-ink-soft">86%</span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden">
+                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="86%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </section>
 
   <!-- Sección: #estudios -->
