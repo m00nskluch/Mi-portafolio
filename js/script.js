@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
   initMobileMenu();
   initSmoothScroll();
+  initActiveNavSpy();
   initLucideIcons();
   initContactForm();
   reveal();
@@ -120,7 +121,65 @@ function initSmoothScroll() {
 }
 
 /**
- * 4. Validación de formulario de contacto estático y notificación toast .glass
+ * 4. Resalta el enlace de navegación activo según la sección visible en el viewport
+ * Utiliza IntersectionObserver y actualiza la clase .active (con subrayado animado scaleX)
+ */
+function initActiveNavSpy() {
+  const sections = document.querySelectorAll('section[id]');
+  const desktopLinks = document.querySelectorAll('.nav-link');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (!sections.length) return;
+
+  const setActive = (sectionId) => {
+    desktopLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href === `#${sectionId}`) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    mobileLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href === `#${sectionId}`) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-25% 0px -65% 0px',
+    threshold: 0
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        setActive(id);
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach((section) => observer.observe(section));
+
+  // Estado inicial por defecto en #inicio
+  if (sections.length > 0) {
+    setActive(sections[0].getAttribute('id'));
+  }
+}
+
+/**
+ * 5. Validación de formulario de contacto estático y notificación toast .glass
  */
 function initContactForm() {
   const form = document.getElementById('contact-form');
@@ -153,7 +212,6 @@ function initContactForm() {
     }
 
     toast.classList.remove('hidden');
-    // Forzar reflow para animación fluida en navegadores WebKit/Blink
     void toast.offsetWidth;
     toast.classList.add('show');
 
@@ -168,7 +226,7 @@ function initContactForm() {
 }
 
 /**
- * 5. Función reveal() reutilizable con IntersectionObserver (fade + slide-up + animación de barras)
+ * 6. Función reveal() reutilizable con IntersectionObserver (fade + slide-up + animación de barras)
  * Observa elementos con clase .reveal y activa .revealed al entrar en viewport
  */
 function reveal() {
