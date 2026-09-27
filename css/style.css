@@ -23,8 +23,10 @@ body {
   font-family: inherit;
   background-color: var(--bone);
   color: var(--ink);
+  overflow-x: hidden;
 }
 
+/* Material Liquid Glass */
 .glass {
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
@@ -35,5 +37,153 @@ body {
 @supports not ((-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px))) {
   .glass {
     background: var(--bone-soft);
+  }
+}
+
+/* Navegación fija y estado scrolled */
+.navbar {
+  transition: padding 0.3s var(--ease), background-color 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.navbar.nav-scrolled {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  background: rgba(245, 241, 232, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 30px rgba(29, 29, 31, 0.04);
+}
+
+/* Botones estilo Pill */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease), background-color 0.2s var(--ease), opacity 0.2s var(--ease);
+  will-change: transform;
+}
+
+.btn-pill:hover {
+  transform: scale(1.03);
+}
+
+.btn-pill:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background-color: var(--pastel);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.btn-secondary {
+  color: var(--ink);
+}
+
+/* Círculos planos de fondo (sin gradientes) con blur y animación flotante suave */
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob {
+  position: absolute;
+  border-radius: var(--radius-full);
+  background-color: var(--pastel);
+  filter: blur(80px);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+.blob-1 {
+  width: 360px;
+  height: 360px;
+  top: 12%;
+  left: 8%;
+  animation: floatOrb1 8s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+  width: 320px;
+  height: 320px;
+  top: 36%;
+  right: 10%;
+  animation: floatOrb2 10s ease-in-out infinite alternate;
+}
+
+.blob-3 {
+  width: 270px;
+  height: 270px;
+  bottom: 8%;
+  left: 35%;
+  animation: floatOrb3 9s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-24px); }
+}
+
+@keyframes floatOrb2 {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(28px); }
+}
+
+@keyframes floatOrb3 {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-18px); }
+}
+
+/* Animación de entrada Hero (fade + translateY(20px) -> 0 al cargar) */
+.hero-enter {
+  animation: heroEntrance 0.85s var(--ease-spring) forwards;
+}
+
+@keyframes heroEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Revelación reutilizable con IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease-spring);
+  will-change: opacity, transform;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respeto por preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .hero-enter,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }

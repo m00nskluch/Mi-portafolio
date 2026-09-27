@@ -33,11 +33,79 @@
   <!-- Estilos personalizados -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-bone text-ink antialiased">
+<body class="bg-bone text-ink antialiased selection:bg-pastel selection:text-ink">
 
-  <!-- Sección: #inicio -->
-  <section id="inicio">
-    <!-- Estructura inicial para inicio -->
+  <!-- 1. Barra de Navegación Fija -->
+  <header class="fixed top-0 left-0 right-0 w-full z-50">
+    <nav id="main-nav" class="navbar glass px-6 py-4 transition-all duration-300">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <!-- Logo / Marca con acento --pastel-deep -->
+        <a href="#inicio" class="text-xl font-bold tracking-tight text-ink hover:opacity-90 transition-opacity">
+          Jeshua <span class="text-pastel-deep">Useche</span>
+        </a>
+
+        <!-- Enlaces en Desktop -->
+        <div class="hidden md:flex items-center gap-7 text-sm font-medium text-ink-soft">
+          <a href="#inicio" class="hover:text-ink transition-colors duration-200">Inicio</a>
+          <a href="#sobre-mi" class="hover:text-ink transition-colors duration-200">Sobre mí</a>
+          <a href="#proyectos" class="hover:text-ink transition-colors duration-200">Proyectos</a>
+          <a href="#habilidades" class="hover:text-ink transition-colors duration-200">Habilidades</a>
+          <a href="#estudios" class="hover:text-ink transition-colors duration-200">Estudios</a>
+          <a href="#contacto" class="hover:text-ink transition-colors duration-200">Contacto</a>
+        </div>
+
+        <!-- Botón Hamburguesa Mobile -->
+        <button id="menu-btn" type="button" class="md:hidden p-2 text-ink rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-deep" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path id="menu-icon-bars" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Menú desplegable Mobile con acabado .glass -->
+      <div id="mobile-menu" class="hidden md:hidden glass mt-3 p-5 rounded-2xl flex flex-col gap-4 text-base font-medium text-ink-soft shadow-lg">
+        <a href="#inicio" class="hover:text-ink transition-colors py-1">Inicio</a>
+        <a href="#sobre-mi" class="hover:text-ink transition-colors py-1">Sobre mí</a>
+        <a href="#proyectos" class="hover:text-ink transition-colors py-1">Proyectos</a>
+        <a href="#habilidades" class="hover:text-ink transition-colors py-1">Habilidades</a>
+        <a href="#estudios" class="hover:text-ink transition-colors py-1">Estudios</a>
+        <a href="#contacto" class="hover:text-ink transition-colors py-1">Contacto</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 2. Sección: #inicio (Hero casi full-height) -->
+  <section id="inicio" class="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-28 pb-16 px-6">
+    <!-- Círculos sólidos planos en --pastel con blur(80px) y animación oscilante flotante (sin gradientes) -->
+    <div class="hero-backdrop" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Contenido Hero con animación de entrada fade + translateY(20px) -> 0 -->
+    <div class="hero-enter relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-[800] tracking-tight text-ink mb-4 leading-tight">
+        Hola, soy Jeshua Useche
+      </h1>
+      <p class="text-xl sm:text-2xl font-semibold text-pastel-deep tracking-tight mb-6">
+        Desarrollador Junior Fullstack · UI/UX
+      </p>
+      <p class="text-base sm:text-lg text-ink-soft max-w-xl mx-auto mb-10 leading-relaxed font-normal">
+        Diseño y desarrollo experiencias web rápidas, fluidas y accesibles, uniendo código escalable con interfaces intuitivas inspiradas en la precisión y naturalidad de interacción.
+      </p>
+
+      <!-- Botones de Acción Pill -->
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#proyectos" class="btn-pill btn-primary shadow-sm">
+          Ver proyectos
+        </a>
+        <a href="#contacto" class="btn-pill btn-secondary glass">
+          Contáctame
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- Sección: #sobre-mi -->
@@ -65,7 +133,7 @@
     <!-- Estructura inicial para contacto -->
   </section>
 
-  <!-- Script principal -->
+  <!-- Script principal con defer -->
   <script src="js/script.js" defer></script>
 </body>
 </html>
