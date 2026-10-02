@@ -1,260 +1,349 @@
-console.log('Portafolio de Jeshua Useche inicializado');
+/**
+ * Jeshua Useche — Portfolio Script v3
+ * Apple Pro Edition
+ *
+ * Módulos:
+ *  1. initLucide       — Renderiza iconos CDN
+ *  2. initNavbar       — Pill compacto con clase .scrolled
+ *  3. initMobileMenu   — Toggle accesible (Escape, click-fuera)
+ *  4. initSmoothScroll — Offset de navbar + focus management
+ *  5. initNavSpy       — IntersectionObserver aria-current
+ *  6. initReveal       — Fade+slide en viewport, clase .in-view
+ *  7. initSkillBars    — double-rAF para trigger de barras
+ *  8. initFAQ          — Acordeón spring con max-height JS
+ *  9. initContactForm  — Validación HTML5 + ARIA errors
+ * 10. showToast        — Feedback flotante
+ */
 
+'use strict';
+
+/* ── INIT ─────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  initNavbarScroll();
+  initLucide();
+  initNavbar();
   initMobileMenu();
   initSmoothScroll();
-  initActiveNavSpy();
-  initLucideIcons();
+  initNavSpy();
+  initReveal();
+  initFAQ();
   initContactForm();
-  reveal();
 });
 
-/**
- * Inicializa los iconos de Lucide vía CDN si están disponibles
- */
-function initLucideIcons() {
-  if (typeof lucide !== 'undefined' && lucide.createIcons) {
-    lucide.createIcons();
-  }
+/* ── 1. LUCIDE ────────────────────────────────────────── */
+function initLucide() {
+  if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
-/**
- * 1. Listener de scroll para compactar la barra de navegación fija (> 40px)
- */
-function initNavbarScroll() {
+/* ── 2. NAVBAR ────────────────────────────────────────────
+   Añade .scrolled cuando scrollY > 60 (rAF throttled)
+   Responde en pointer-down para máxima sensación Apple
+──────────────────────────────────────────────────────── */
+function initNavbar() {
   const nav = document.getElementById('main-nav');
   if (!nav) return;
 
-  const onScroll = () => {
-    if (window.scrollY > 40) {
-      nav.classList.add('nav-scrolled');
-    } else {
-      nav.classList.remove('nav-scrolled');
-    }
+  let raf = false;
+  const update = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+    raf = false;
   };
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.addEventListener('scroll', () => {
+    if (!raf) { requestAnimationFrame(update); raf = true; }
+  }, { passive: true });
+
+  update();
 }
 
-/**
- * 2. Toggle del Menú Mobile con panel .glass y accesibilidad
- */
+/* ── 3. MOBILE MENU ───────────────────────────────────────
+   Toggle accesible: Escape, clic-fuera, focus en primer link
+──────────────────────────────────────────────────────── */
 function initMobileMenu() {
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const iconBars = document.getElementById('menu-icon-bars');
-  const iconClose = document.getElementById('menu-icon-close');
-  const nav = document.getElementById('main-nav');
+  const btn  = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const nav  = btn?.closest('nav, header');
+  if (!btn || !menu) return;
 
-  if (!menuBtn || !mobileMenu) return;
+  const isOpen = () => btn.getAttribute('aria-expanded') === 'true';
 
-  const closeMenu = () => {
-    if (!mobileMenu.classList.contains('hidden')) {
-      mobileMenu.classList.add('hidden');
-      menuBtn.setAttribute('aria-expanded', 'false');
-      iconBars?.classList.remove('hidden');
-      iconClose?.classList.add('hidden');
-    }
+  const open = () => {
+    menu.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    // Respuesta inmediata + foco tras animación spring (~260ms)
+    setTimeout(() => menu.querySelector('.mobile-link')?.focus(), 60);
   };
 
-  const toggleMenu = () => {
-    const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-    mobileMenu.classList.toggle('hidden');
-    menuBtn.setAttribute('aria-expanded', String(!isExpanded));
-    iconBars?.classList.toggle('hidden');
-    iconClose?.classList.toggle('hidden');
+  const close = () => {
+    menu.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
   };
 
-  menuBtn.addEventListener('click', (e) => {
+  btn.addEventListener('pointerdown', e => {
     e.stopPropagation();
-    toggleMenu();
+    isOpen() ? close() : open();
   });
 
-  // Cerrar al hacer clic fuera del menú o de la barra
-  document.addEventListener('click', (e) => {
-    if (!nav?.contains(e.target) && !mobileMenu.contains(e.target)) {
-      closeMenu();
-    }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && isOpen()) { close(); btn.focus(); }
   });
 
-  // Exponer función de cierre para uso en clics de enlace
-  window.closeMobileMenu = closeMenu;
+  document.addEventListener('pointerdown', e => {
+    if (isOpen() && nav && !nav.contains(e.target)) close();
+  });
+
+  menu.querySelectorAll('.mobile-link, .mobile-cta').forEach(el => {
+    el.addEventListener('click', close);
+  });
+
+  window._closeMenu = close;
 }
 
-/**
- * 3. Smooth scroll para enlaces internos con compensación de la nav fija
- */
+/* ── 4. SMOOTH SCROLL ─────────────────────────────────────
+   Offset de navbar fija. Focus management WCAG 2.4.3
+──────────────────────────────────────────────────────── */
 function initSmoothScroll() {
-  const navLinks = document.querySelectorAll('a[href^="#"]');
   const nav = document.getElementById('main-nav');
 
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href');
-      if (!targetId || targetId === '#') return;
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (!id || id === '#') return;
 
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        e.preventDefault();
+      const target = document.querySelector(id);
+      if (!target) return;
 
-        if (typeof window.closeMobileMenu === 'function') {
-          window.closeMobileMenu();
-        }
+      e.preventDefault();
+      window._closeMenu?.();
 
-        const navHeight = nav ? nav.offsetHeight : 0;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = targetPosition - navHeight;
+      const navH   = nav ? nav.getBoundingClientRect().height + 16 : 0;
+      const top    = target.getBoundingClientRect().top + window.scrollY - navH;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      if (history.pushState) history.pushState(null, '', id);
 
-        if (history.pushState) {
-          history.pushState(null, '', targetId);
-        }
+      // Mover foco al heading (screen reader WCAG 2.4.3)
+      const heading = target.querySelector('[id$="-title"], h2, h1');
+      if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        setTimeout(() => heading.focus({ preventScroll: true }), 350);
       }
     });
   });
 }
 
-/**
- * 4. Resalta el enlace de navegación activo según la sección visible en el viewport
- * Utiliza IntersectionObserver y actualiza la clase .active (con subrayado animado scaleX)
- */
-function initActiveNavSpy() {
+/* ── 5. NAV SPY ───────────────────────────────────────────
+   Resalta enlace activo con aria-current="page"
+──────────────────────────────────────────────────────── */
+function initNavSpy() {
   const sections = document.querySelectorAll('section[id]');
-  const desktopLinks = document.querySelectorAll('.nav-link');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-
+  const dLinks   = document.querySelectorAll('.nav-link');
+  const mLinks   = document.querySelectorAll('.mobile-link');
   if (!sections.length) return;
 
-  const setActive = (sectionId) => {
-    desktopLinks.forEach((link) => {
-      const href = link.getAttribute('href');
-      if (href === `#${sectionId}`) {
-        link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
-      } else {
-        link.classList.remove('active');
-        link.removeAttribute('aria-current');
-      }
-    });
-
-    mobileLinks.forEach((link) => {
-      const href = link.getAttribute('href');
-      if (href === `#${sectionId}`) {
-        link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
-      } else {
-        link.classList.remove('active');
-        link.removeAttribute('aria-current');
-      }
+  const activate = id => {
+    [dLinks, mLinks].forEach(group => {
+      group.forEach(link => {
+        const active = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('active', active);
+        active
+          ? link.setAttribute('aria-current', 'page')
+          : link.removeAttribute('aria-current');
+      });
     });
   };
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '-25% 0px -65% 0px',
-    threshold: 0
-  };
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => e.isIntersecting && activate(e.target.id)),
+    { rootMargin: '-20% 0px -55% 0px', threshold: 0 }
+  );
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        setActive(id);
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach((section) => observer.observe(section));
-
-  // Estado inicial por defecto en #inicio
-  if (sections.length > 0) {
-    setActive(sections[0].getAttribute('id'));
-  }
+  sections.forEach(s => obs.observe(s));
+  activate(sections[0].id);
 }
 
-/**
- * 5. Validación de formulario de contacto estático y notificación toast .glass
- */
+/* ── 6. REVEAL ────────────────────────────────────────────
+   Fade+slide al entrar al viewport. Clase .in-view
+   Dispara también la animación de barras
+──────────────────────────────────────────────────────── */
+function initReveal() {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+
+  const obs = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in-view');
+        animateBars(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: '0px 0px -48px 0px', threshold: 0.07 }
+  );
+
+  items.forEach(el => obs.observe(el));
+}
+
+/* ── 7. SKILL BARS ────────────────────────────────────────
+   Double requestAnimationFrame garantiza que la transición
+   CSS se dispare DESPUÉS de que width empieza en 0
+──────────────────────────────────────────────────────── */
+function animateBars(container) {
+  container.querySelectorAll('.skill-fill').forEach(bar => {
+    const target = bar.getAttribute('data-w') || '0%';
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => { bar.style.width = target; })
+    );
+  });
+}
+
+/* ── 8. FAQ ACORDEÓN ──────────────────────────────────────
+   Animación spring vía max-height dinámico (scrollHeight)
+   Comportamiento acordeón: solo un item abierto a la vez
+   Navegación por teclado: ArrowDown / ArrowUp
+──────────────────────────────────────────────────────── */
+function initFAQ() {
+  const items = document.querySelectorAll('.faq-item');
+  if (!items.length) return;
+
+  items.forEach(item => {
+    const btn   = item.querySelector('.faq-btn');
+    const panel = item.querySelector('.faq-panel');
+    if (!btn || !panel) return;
+
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+
+      // Cerrar todos los demás (acordeón exclusivo)
+      items.forEach(other => {
+        if (other === item) return;
+        const b = other.querySelector('.faq-btn');
+        const p = other.querySelector('.faq-panel');
+        if (b && p) collapse(b, p);
+      });
+
+      open ? collapse(btn, panel) : expand(btn, panel);
+    });
+
+    // Navegación por teclado entre items
+    btn.addEventListener('keydown', e => {
+      if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return;
+      e.preventDefault();
+      const triggers = [...document.querySelectorAll('.faq-btn')];
+      const idx = triggers.indexOf(btn);
+      const next = e.key === 'ArrowDown' ? triggers[idx + 1] : triggers[idx - 1];
+      next?.focus();
+    });
+  });
+}
+
+function expand(btn, panel) {
+  btn.setAttribute('aria-expanded', 'true');
+  panel.style.maxHeight = `${panel.scrollHeight}px`;
+  panel.classList.add('open');
+}
+
+function collapse(btn, panel) {
+  btn.setAttribute('aria-expanded', 'false');
+  panel.style.maxHeight = '0px';
+  panel.classList.remove('open');
+}
+
+/* ── 9. FORMULARIO ────────────────────────────────────────
+   Validación HTML5 + mensajes ARIA inline
+   Envío nativo a FormSubmit (sin preventDefault si válido)
+──────────────────────────────────────────────────────── */
 function initContactForm() {
-  const form = document.getElementById('contact-form');
-  const toast = document.getElementById('toast');
-  if (!form || !toast) return;
+  const form   = document.getElementById('contact-form');
+  const toast  = document.getElementById('toast');
+  const submit = document.getElementById('contact-submit');
+  if (!form) return;
 
-  let toastTimer = null;
+  form.addEventListener('submit', e => {
+    const f = {
+      name:    form.querySelector('[name="name"]'),
+      email:   form.querySelector('[name="email"]'),
+      message: form.querySelector('[name="message"]'),
+    };
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    Object.values(f).forEach(clearErr);
 
-    const nameInput = document.getElementById('contact-name');
-    const emailInput = document.getElementById('contact-email');
-    const messageInput = document.getElementById('contact-message');
+    let valid = true;
 
-    const nameVal = nameInput ? nameInput.value.trim() : '';
-    const emailVal = emailInput ? emailInput.value.trim() : '';
-    const messageVal = messageInput ? messageInput.value.trim() : '';
+    if (!f.name?.value.trim()) {
+      setErr(f.name, 'Ingresa tu nombre completo.');
+      valid = false;
+    }
+    if (!validEmail(f.email?.value.trim())) {
+      setErr(f.email, 'Correo electrónico inválido.');
+      valid = false;
+    }
+    if (!f.message?.value.trim()) {
+      setErr(f.message, 'El mensaje no puede estar vacío.');
+      valid = false;
+    }
 
-    if (!nameVal || !emailVal || !messageVal) {
+    if (!valid) {
+      e.preventDefault();
+      form.querySelector('[aria-invalid="true"]')?.focus();
       return;
     }
 
-    // Limpiar formulario tras validación
-    form.reset();
-
-    // Mostrar toast .glass con animación fade+slide
-    if (toastTimer) {
-      clearTimeout(toastTimer);
+    // Feedback visual antes de redirección FormSubmit
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = 'Enviando…';
     }
-
-    toast.classList.remove('hidden');
-    void toast.offsetWidth;
-    toast.classList.add('show');
-
-    // Desvanecer tras 3.5 segundos
-    toastTimer = setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => {
-        toast.classList.add('hidden');
-      }, 350);
-    }, 3500);
+    showToast(toast);
+    // El form se envía nativamente al action
   });
 }
 
-/**
- * 6. Función reveal() reutilizable con IntersectionObserver (fade + slide-up + animación de barras)
- * Observa elementos con clase .reveal y activa .revealed al entrar en viewport
- */
-function reveal() {
-  const targets = document.querySelectorAll('.reveal:not(.revealed)');
-  if (!targets.length) return;
+/* ── 10. TOAST ────────────────────────────────────────────
+   Animación spring de entrada + auto-hide a los 4.5s
+──────────────────────────────────────────────────────── */
+function showToast(toast) {
+  if (!toast) return;
+  toast.hidden = false;
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => toast.classList.add('show'))
+  );
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => { toast.hidden = true; }, 500);
+  }, 4500);
+}
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -40px 0px',
-    threshold: 0.12
-  };
+/* ── HELPERS ──────────────────────────────────────────── */
+function validEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v || '');
+}
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
+function setErr(input, msg) {
+  if (!input) return;
+  input.setAttribute('aria-invalid', 'true');
+  const id  = `${input.id}-err`;
+  let   el  = document.getElementById(id);
+  if (!el) {
+    el = document.createElement('p');
+    el.id = id;
+    el.setAttribute('role', 'alert');
+    el.style.cssText = [
+      'color:#ff453a',
+      'font-size:0.75rem',
+      'font-weight:500',
+      'margin-top:4px',
+      'letter-spacing:-0.01em',
+    ].join(';');
+    input.after(el);
+  }
+  el.textContent = msg;
+  input.setAttribute('aria-describedby', id);
+}
 
-        // Animar barras de progreso de habilidades contenidas
-        const progressBars = entry.target.querySelectorAll('.skill-progress-bar');
-        progressBars.forEach((bar) => {
-          const targetWidth = bar.getAttribute('data-width') || '0%';
-          bar.style.width = targetWidth;
-        });
-
-        obs.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  targets.forEach((el) => observer.observe(el));
+function clearErr(input) {
+  if (!input) return;
+  input.removeAttribute('aria-invalid');
+  input.removeAttribute('aria-describedby');
+  document.getElementById(`${input.id}-err`)?.remove();
 }

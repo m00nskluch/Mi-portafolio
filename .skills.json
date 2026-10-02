@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "dark-mode": {
+      "version": "2.0.1",
+      "installedAt": "2026-10-02T12:20:16.440Z",
+      "platform": "gemini"
+    }
+  }
+}

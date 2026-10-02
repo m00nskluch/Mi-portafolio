@@ -1,653 +1,764 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portafolio profesional de Jeshua Useche, Desarrollador Fullstack. Proyectos, habilidades y experiencia técnica con diseño Liquid Glass.">
-  <title>Jeshua Useche | Desarrollador Fullstack</title>
+  <meta name="description"
+    content="Jeshua Useche — Desarrollador Junior Fullstack. Diseño y construyo experiencias web de alta fidelidad desde Santiago, Chile.">
+  <meta name="author" content="Jeshua Skiold Useche Rodriguez">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:title" content="Jeshua Useche — Desarrollador Fullstack Junior">
+  <meta property="og:description"
+    content="Radicado en Santiago desde los 9 años. Escribiendo código, diseñando experiencias y construyendo el futuro, línea por línea.">
+  <meta property="og:type" content="website">
+  <title>Jeshua Useche — Desarrollador Fullstack Junior</title>
 
-  <!-- Favicon Monograma JU SVG inline -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23F5F1E8'/%3E%3Ccircle cx='16' cy='16' r='13' fill='%23AECBEB'/%3E%3Ctext x='16' y='21' font-size='13' font-family='-apple-system,BlinkMacSystemFont,Inter,sans-serif' font-weight='800' text-anchor='middle' fill='%231D1D1F'%3EJU%3C/text%3E%3C/svg%3E">
+  <!-- Favicon JU -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%23000'/%3E%3Ctext x='16' y='22' font-size='14' font-family='-apple-system,sans-serif' font-weight='700' text-anchor='middle' fill='%23fff'%3EJU%3C/text%3E%3C/svg%3E">
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'bone': '#F5F1E8',
-            'bone-soft': '#FBF9F4',
-            'pastel': '#AECBEB',
-            'pastel-deep': '#7FA8D6',
-            'ink': '#1D1D1F',
-            'ink-soft': '#6E6E73',
-          }
-        }
-      }
-    }
-  </script>
+  <!-- SVG Liquid Glass Refraction Filter -->
+  <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
+    <filter id="liquid-refract">
+      <feTurbulence type="fractalNoise" baseFrequency="0.009 0.011" numOctaves="2" seed="5" result="n">
+        <animate attributeName="baseFrequency" dur="16s" values="0.009 0.011;0.011 0.009;0.009 0.011"
+          repeatCount="indefinite" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
 
-  <!-- Google Fonts: Inter (400-800) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
 
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Estilos personalizados -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-bone text-ink antialiased selection:bg-pastel selection:text-ink">
 
-  <!-- 1. Barra de Navegación Fija -->
-  <header class="fixed top-0 left-0 right-0 w-full z-50">
-    <nav id="main-nav" class="navbar glass px-6 py-4 transition-all duration-300" aria-label="Navegación principal">
-      <div class="max-w-6xl mx-auto flex items-center justify-between">
-        <!-- Logo / Marca con acento --pastel-deep -->
-        <a href="#inicio" class="text-xl font-bold tracking-tight text-ink hover:opacity-90 transition-opacity" aria-label="Jeshua Useche - Volver al inicio">
-          Jeshua <span class="text-pastel-deep">Useche</span>
-        </a>
+<body>
 
-        <!-- Enlaces en Desktop -->
-        <div class="hidden md:flex items-center gap-7 text-sm font-medium text-ink-soft">
-          <a href="#inicio" class="nav-link hover:text-ink transition-colors duration-200">Inicio</a>
-          <a href="#sobre-mi" class="nav-link hover:text-ink transition-colors duration-200">Sobre mí</a>
-          <a href="#proyectos" class="nav-link hover:text-ink transition-colors duration-200">Proyectos</a>
-          <a href="#habilidades" class="nav-link hover:text-ink transition-colors duration-200">Habilidades</a>
-          <a href="#estudios" class="nav-link hover:text-ink transition-colors duration-200">Estudios</a>
-          <a href="#contacto" class="nav-link hover:text-ink transition-colors duration-200">Contacto</a>
-        </div>
-
-        <!-- Botón Hamburguesa Mobile -->
-        <button id="menu-btn" type="button" class="md:hidden p-2 text-ink rounded-lg focus:outline-none focus:ring-2 focus:ring-pastel-deep" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobile-menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path id="menu-icon-bars" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Menú desplegable Mobile con acabado .glass -->
-      <div id="mobile-menu" class="hidden md:hidden glass mt-3 p-5 rounded-2xl flex flex-col gap-4 text-base font-medium text-ink-soft shadow-lg">
-        <a href="#inicio" class="mobile-nav-link hover:text-ink transition-colors py-1">Inicio</a>
-        <a href="#sobre-mi" class="mobile-nav-link hover:text-ink transition-colors py-1">Sobre mí</a>
-        <a href="#proyectos" class="mobile-nav-link hover:text-ink transition-colors py-1">Proyectos</a>
-        <a href="#habilidades" class="mobile-nav-link hover:text-ink transition-colors py-1">Habilidades</a>
-        <a href="#estudios" class="mobile-nav-link hover:text-ink transition-colors py-1">Estudios</a>
-        <a href="#contacto" class="mobile-nav-link hover:text-ink transition-colors py-1">Contacto</a>
-      </div>
-    </nav>
-  </header>
-
-  <!-- 2. Sección: #inicio (Hero casi full-height) -->
-  <section id="inicio" class="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-28 pb-16 px-6">
-    <!-- Círculos sólidos planos en --pastel con blur(80px) y animación oscilante flotante (sin gradientes) -->
-    <div class="hero-backdrop" aria-hidden="true">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-    </div>
-
-    <!-- Contenido Hero con animación de entrada fade + translateY(20px) -> 0 -->
-    <div class="hero-enter relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-[800] tracking-tight text-ink mb-4 leading-tight">
-        Hola, soy Jeshua Useche
-      </h1>
-      <p class="text-xl sm:text-2xl font-semibold text-pastel-deep tracking-tight mb-6">
-        Desarrollador Junior Fullstack · UI/UX
-      </p>
-      <p class="text-base sm:text-lg text-ink-soft max-w-xl mx-auto mb-10 leading-relaxed font-normal">
-        Diseño y desarrollo experiencias web rápidas, fluidas y accesibles, uniendo código escalable con interfaces intuitivas inspiradas en la precisión y naturalidad de interacción.
-      </p>
-
-      <!-- Botones de Acción Pill -->
-      <div class="flex flex-wrap items-center justify-center gap-4">
-        <a href="#proyectos" class="btn-pill btn-primary shadow-sm" aria-label="Ver sección de proyectos destacados">
-          Ver proyectos
-        </a>
-        <a href="#contacto" class="btn-pill btn-secondary glass" aria-label="Ir a la sección de contacto">
-          Contáctame
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Sección: #sobre-mi -->
-  <section id="sobre-mi" class="py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-      <!-- Encabezado de sección -->
-      <div class="text-center max-w-xl mx-auto mb-16 reveal">
-        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Sobre mí</p>
-        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Trayectoria y Enfoque</h2>
-      </div>
-
-      <!-- Dos columnas: Avatar placeholder a la izquierda, narrativa a la derecha -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center mb-16">
-        <!-- Columna Izquierda: Tarjeta .glass circular con iniciales "JU" sobre fondo --pastel -->
-        <div class="md:col-span-5 flex justify-center reveal" style="--stagger: 0">
-          <div class="glass w-60 h-60 sm:w-72 sm:h-72 rounded-full p-4 flex items-center justify-center shadow-lg relative" role="img" aria-label="Monograma de Jeshua Useche">
-            <div class="w-full h-full rounded-full bg-pastel flex items-center justify-center border border-[rgba(255,255,255,0.6)] shadow-inner">
-              <span class="text-5xl sm:text-6xl font-[800] tracking-tighter text-ink select-none">JU</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Texto descriptivo -->
-        <div class="md:col-span-7 flex flex-col gap-4 text-base sm:text-lg text-ink-soft leading-relaxed reveal" style="--stagger: 1">
-          <p>
-            Soy estudiante de <strong class="font-semibold text-ink">4° Año Medio</strong> y <strong class="font-semibold text-ink">desarrollador junior fullstack</strong> (frontend, backend y diseño UI/UX), apasionado por construir aplicaciones digitales modernas, funcionales y visualmente armónicas.
-          </p>
-          <p>
-            En mi día a día trabajo con tecnologías de vanguardia como <span class="text-ink font-medium">Next.js, React, TypeScript, Tailwind CSS, SQLite, Turso, Drizzle ORM y Clerk</span>, cuidando la arquitectura, la persistencia y la seguridad del sistema.
-          </p>
-          <p>
-            Cofundé <span class="text-ink font-semibold">S&amp;M Network Company</span>, iniciativa con la que creamos sitios web y catálogos digitales orientados a impulsar la visibilidad y crecimiento de pequeños negocios locales.
-          </p>
-          <p>
-            Fui seleccionado a nivel nacional en <span class="text-ink font-semibold">Samsung Solve for Tomorrow Chile</span> gracias a un proyecto de mapeo sensorial enfocado en aportar soluciones prácticas mediante tecnología e innovación.
-          </p>
-          <p>
-            Desde los 12 años trabajé los fines de semana en un restaurante; esta etapa temprana me brindó una profunda disciplina, adaptabilidad y una sólida ética de trabajo en equipo.
-          </p>
-        </div>
-      </div>
-
-      <!-- 3 tarjetas .glass pequeñas con métricas/números en --pastel-deep -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 flex flex-col justify-between reveal" style="--stagger: 2">
-          <span class="text-4xl sm:text-5xl font-[800] text-pastel-deep tracking-tight mb-2">2+</span>
-          <div>
-            <h3 class="font-bold text-ink text-base">Años programando</h3>
-            <p class="text-xs sm:text-sm text-ink-soft mt-1 leading-relaxed">Formación autodidacta y proyectos prácticos continuos.</p>
-          </div>
-        </div>
-
-        <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 flex flex-col justify-between reveal" style="--stagger: 3">
-          <span class="text-4xl sm:text-5xl font-[800] text-pastel-deep tracking-tight mb-2">12+</span>
-          <div>
-            <h3 class="font-bold text-ink text-base">Proyectos desarrollados</h3>
-            <p class="text-xs sm:text-sm text-ink-soft mt-1 leading-relaxed">Soluciones web, catálogos interactivos y prototipos funcionales.</p>
-          </div>
-        </div>
-
-        <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 flex flex-col justify-between reveal" style="--stagger: 4">
-          <span class="text-4xl sm:text-5xl font-[800] text-pastel-deep tracking-tight mb-2">15+</span>
-          <div>
-            <h3 class="font-bold text-ink text-base">Herramientas dominadas</h3>
-            <p class="text-xs sm:text-sm text-ink-soft mt-1 leading-relaxed">Librerías, frameworks, bases de datos y entornos de desarrollo.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. Sección: #proyectos -->
-  <section id="proyectos" class="py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-      <!-- Encabezado de sección -->
-      <div class="text-center max-w-xl mx-auto mb-16 reveal">
-        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Proyectos</p>
-        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Trabajos Destacados</h2>
-        <p class="text-ink-soft mt-3 text-base">Iniciativas reales, proyectos colaborativos e investigación aplicada.</p>
-      </div>
-
-      <!-- Grid de 4 tarjetas .glass con hover translateY(-4px), sombra suave y stagger -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <!-- Proyecto 1: S&M Network Company -->
-        <div class="glass project-card rounded-[var(--radius-lg)] p-8 flex flex-col justify-between reveal" style="--stagger: 0">
-          <div>
-            <h3 class="text-2xl font-bold tracking-tight text-ink mb-3">S&amp;M Network Company</h3>
-            <p class="text-ink-soft text-base leading-relaxed mb-6">
-              Plataforma y catálogos digitales para pequeños negocios, cofundada con Andri Manrrique para impulsar el comercio local.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="chip-outline">Next.js</span>
-              <span class="chip-outline">React</span>
-              <span class="chip-outline">TypeScript</span>
-              <span class="chip-outline">Tailwind</span>
-              <span class="chip-outline">Turso</span>
-            </div>
-          </div>
-          <div>
-            <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-pastel-deep transition-colors group" aria-label="Ver más información sobre el proyecto S&M Network Company">
-              Ver más
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-pastel-deep group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Proyecto 2: Mapeo sensorial -->
-        <div class="glass project-card rounded-[var(--radius-lg)] p-8 flex flex-col justify-between reveal" style="--stagger: 1">
-          <div>
-            <h3 class="text-2xl font-bold tracking-tight text-ink mb-3">Mapeo sensorial</h3>
-            <p class="text-ink-soft text-base leading-relaxed mb-6">
-              Proyecto para Samsung Solve for Tomorrow Chile, finalista nacional, desarrollado junto a Zoe y Daniel con enfoque social.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="chip-outline">Trabajo en equipo</span>
-              <span class="chip-outline">Investigación</span>
-              <span class="chip-outline">Prototipado</span>
-            </div>
-          </div>
-          <div>
-            <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-pastel-deep transition-colors group" aria-label="Ver más información sobre el proyecto de Mapeo Sensorial">
-              Ver más
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-pastel-deep group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Proyecto 3: Nanoburbujas de gas -->
-        <div class="glass project-card rounded-[var(--radius-lg)] p-8 flex flex-col justify-between reveal" style="--stagger: 2">
-          <div>
-            <h3 class="text-2xl font-bold tracking-tight text-ink mb-3">Nanoburbujas de gas</h3>
-            <p class="text-ink-soft text-base leading-relaxed mb-6">
-              Informe y material divulgativo para Ciencias para la Ciudadanía, enfocado en aplicaciones científicas y sustentabilidad.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="chip-outline">Investigación</span>
-              <span class="chip-outline">Divulgación científica</span>
-            </div>
-          </div>
-          <div>
-            <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-pastel-deep transition-colors group" aria-label="Ver más información sobre el informe de Nanoburbujas de gas">
-              Ver más
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-pastel-deep group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Proyecto 4: Este portafolio -->
-        <div class="glass project-card rounded-[var(--radius-lg)] p-8 flex flex-col justify-between reveal" style="--stagger: 3">
-          <div>
-            <h3 class="text-2xl font-bold tracking-tight text-ink mb-3">Este portafolio</h3>
-            <p class="text-ink-soft text-base leading-relaxed mb-6">
-              Sitio hecho con HTML, CSS, JavaScript, Tailwind y diseño Liquid Glass, optimizado para una interacción ágil y refinada.
-            </p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="chip-outline">HTML5</span>
-              <span class="chip-outline">CSS3</span>
-              <span class="chip-outline">JavaScript</span>
-              <span class="chip-outline">Tailwind</span>
-            </div>
-          </div>
-          <div>
-            <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-pastel-deep transition-colors group" aria-label="Ver más información sobre la arquitectura de este portafolio">
-              Ver más
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-pastel-deep group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. Sección: #habilidades -->
-  <section id="habilidades" class="py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-      <!-- Encabezado de sección -->
-      <div class="text-center max-w-xl mx-auto mb-16 reveal">
-        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Habilidades</p>
-        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Ecosistema Técnico</h2>
-        <p class="text-ink-soft mt-3 text-base">Competencias organizadas por dominio con indicadores de familiaridad práctica.</p>
-      </div>
-
-      <!-- Grid de tarjetas bone-soft agrupadas en 3 categorías con stagger -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Categoría 1: Frontend -->
-        <div class="bg-bone-soft rounded-[var(--radius-lg)] p-8 border border-[rgba(255,255,255,0.7)] shadow-sm interactive-card flex flex-col justify-between reveal" style="--stagger: 0">
-          <div>
-            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[rgba(29,29,31,0.06)]">
-              <i data-lucide="layout" class="w-6 h-6 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-              <h3 class="text-xl font-bold text-ink tracking-tight">Frontend</h3>
-            </div>
-
-            <div class="flex flex-col gap-5">
-              <!-- React -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="atom" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    React
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">88%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de React">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="88%"></div>
-                </div>
-              </div>
-
-              <!-- Next.js -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="globe" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Next.js
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">85%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Next.js">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="85%"></div>
-                </div>
-              </div>
-
-              <!-- TypeScript -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="file-code" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    TypeScript
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">80%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de TypeScript">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="80%"></div>
-                </div>
-              </div>
-
-              <!-- Tailwind CSS -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="palette" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Tailwind CSS
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">92%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Tailwind CSS">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="92%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categoría 2: Backend & Datos -->
-        <div class="bg-bone-soft rounded-[var(--radius-lg)] p-8 border border-[rgba(255,255,255,0.7)] shadow-sm interactive-card flex flex-col justify-between reveal" style="--stagger: 1">
-          <div>
-            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[rgba(29,29,31,0.06)]">
-              <i data-lucide="database" class="w-6 h-6 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-              <h3 class="text-xl font-bold text-ink tracking-tight">Backend &amp; Datos</h3>
-            </div>
-
-            <div class="flex flex-col gap-5">
-              <!-- Node.js -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="server" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Node.js
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">78%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Node.js">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="78%"></div>
-                </div>
-              </div>
-
-              <!-- SQLite -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="database" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    SQLite
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">82%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de SQLite">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="82%"></div>
-                </div>
-              </div>
-
-              <!-- Turso -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="hard-drive" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Turso
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">80%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Turso">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="80%"></div>
-                </div>
-              </div>
-
-              <!-- Drizzle ORM -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="layers" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Drizzle ORM
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">82%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Drizzle ORM">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="82%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categoría 3: Herramientas -->
-        <div class="bg-bone-soft rounded-[var(--radius-lg)] p-8 border border-[rgba(255,255,255,0.7)] shadow-sm interactive-card flex flex-col justify-between reveal" style="--stagger: 2">
-          <div>
-            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-[rgba(29,29,31,0.06)]">
-              <i data-lucide="wrench" class="w-6 h-6 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-              <h3 class="text-xl font-bold text-ink tracking-tight">Herramientas</h3>
-            </div>
-
-            <div class="flex flex-col gap-4">
-              <!-- Clerk -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Clerk
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">85%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Clerk">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="85%"></div>
-                </div>
-              </div>
-
-              <!-- Git & GitHub -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="git-branch" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Git / GitHub
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">88%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Git y GitHub">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="88%"></div>
-                </div>
-              </div>
-
-              <!-- Google Antigravity IDE -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="sparkles" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Google Antigravity IDE
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">90%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Google Antigravity IDE">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="90%"></div>
-                </div>
-              </div>
-
-              <!-- Google AI Studio -->
-              <div>
-                <div class="flex items-center justify-between text-sm mb-1.5">
-                  <span class="flex items-center gap-2 font-medium text-ink">
-                    <i data-lucide="cpu" class="w-4 h-4 text-pastel-deep stroke-[1.8]" aria-hidden="true"></i>
-                    Google AI Studio
-                  </span>
-                  <span class="text-xs font-semibold text-ink-soft">86%</span>
-                </div>
-                <div class="w-full h-2 rounded-full bg-bone-soft border border-[rgba(29,29,31,0.08)] overflow-hidden" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" aria-label="Nivel de dominio de Google AI Studio">
-                  <div class="h-full rounded-full bg-pastel skill-progress-bar" data-width="86%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Sección: #estudios (Timeline vertical con línea --pastel y puntos .glass) -->
-  <section id="estudios" class="py-24 px-6 relative">
-    <div class="max-w-4xl mx-auto">
-      <!-- Encabezado de sección -->
-      <div class="text-center max-w-xl mx-auto mb-16 reveal">
-        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Estudios &amp; Logros</p>
-        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Hitos Académicos</h2>
-        <p class="text-ink-soft mt-3 text-base">Trayectoria formativa, reconocimientos y proyectos de investigación.</p>
-      </div>
-
-      <!-- Timeline vertical con línea en --pastel y puntos .glass -->
-      <div class="relative">
-        <!-- Línea vertical sólida en --pastel -->
-        <div class="absolute top-4 bottom-4 left-6 w-0.5 bg-pastel" aria-hidden="true"></div>
-
-        <div class="flex flex-col gap-10">
-          
-          <!-- Hito 1: 4° Año Medio — en curso -->
-          <div class="relative flex items-start pl-16 reveal" style="--stagger: 0">
-            <!-- Punto .glass -->
-            <div class="glass absolute left-6 top-6 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.7)] shadow-sm">
-              <div class="w-2.5 h-2.5 rounded-full bg-pastel-deep"></div>
-            </div>
-            <!-- Tarjeta .glass -->
-            <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 w-full shadow-sm">
-              <span class="inline-block text-xs font-bold uppercase tracking-wider text-pastel-deep mb-1">Educación Secundaria · 2026</span>
-              <h3 class="text-xl font-bold text-ink mb-2">4° Año Medio — en curso</h3>
-              <p class="text-ink-soft text-sm sm:text-base leading-relaxed">
-                Formación académica científico-humanista combinada con desarrollo autodidacta intensivo en programación fullstack, ingeniería de software y diseño UI/UX.
-              </p>
-            </div>
-          </div>
-
-          <!-- Hito 2: Finalista nacional, Samsung Solve for Tomorrow Chile -->
-          <div class="relative flex items-start pl-16 reveal" style="--stagger: 1">
-            <!-- Punto .glass -->
-            <div class="glass absolute left-6 top-6 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.7)] shadow-sm">
-              <div class="w-2.5 h-2.5 rounded-full bg-pastel-deep"></div>
-            </div>
-            <!-- Tarjeta .glass -->
-            <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 w-full shadow-sm">
-              <span class="inline-block text-xs font-bold uppercase tracking-wider text-pastel-deep mb-1">Innovación &amp; STEM</span>
-              <h3 class="text-xl font-bold text-ink mb-2">Finalista nacional, Samsung Solve for Tomorrow Chile</h3>
-              <p class="text-ink-soft text-sm sm:text-base leading-relaxed">
-                Seleccionado a nivel nacional junto a Zoe y Daniel gracias a un proyecto de mapeo sensorial enfocado en aportar soluciones prácticas mediante tecnología y prototipado colaborativo.
-              </p>
-            </div>
-          </div>
-
-          <!-- Hito 3: Informe Ciencias para la Ciudadanía: nanoburbujas de gas -->
-          <div class="relative flex items-start pl-16 reveal" style="--stagger: 2">
-            <!-- Punto .glass -->
-            <div class="glass absolute left-6 top-6 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center border border-[rgba(255,255,255,0.7)] shadow-sm">
-              <div class="w-2.5 h-2.5 rounded-full bg-pastel-deep"></div>
-            </div>
-            <!-- Tarjeta .glass -->
-            <div class="glass interactive-card rounded-[var(--radius-lg)] p-7 w-full shadow-sm">
-              <span class="inline-block text-xs font-bold uppercase tracking-wider text-pastel-deep mb-1">Divulgación Científica</span>
-              <h3 class="text-xl font-bold text-ink mb-2">Informe Ciencias para la Ciudadanía: nanoburbujas de gas</h3>
-              <p class="text-ink-soft text-sm sm:text-base leading-relaxed">
-                Investigación analítica y diseño de material de divulgación científica en torno a las propiedades y aplicaciones sustentables de nanoburbujas de gas en ecosistemas y tratamiento hídrico.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Sección: #contacto -->
-  <section id="contacto" class="py-24 px-6 relative">
-    <div class="max-w-4xl mx-auto">
-      <!-- Encabezado de sección -->
-      <div class="text-center max-w-xl mx-auto mb-16 reveal">
-        <p class="text-sm font-semibold tracking-wider uppercase text-pastel-deep mb-2">Contacto</p>
-        <h2 class="text-3xl sm:text-4xl font-[800] tracking-tight text-ink">Iniciemos una Conversación</h2>
-        <p class="text-ink-soft mt-3 text-base">¿Tienes un proyecto, propuesta o consulta? Envíame un mensaje directo.</p>
-      </div>
-
-      <!-- Formulario en tarjeta .glass -->
-      <div class="glass rounded-[var(--radius-lg)] p-8 sm:p-10 max-w-2xl mx-auto mb-12 shadow-sm reveal">
-        <form id="contact-form" class="flex flex-col gap-6" novalidate aria-label="Formulario de contacto">
-          <!-- Nombre -->
-          <div>
-            <label for="contact-name" class="block text-sm font-semibold text-ink mb-2">Nombre completo</label>
-            <input type="text" id="contact-name" name="name" required placeholder="Tu nombre" class="glass-input" autocomplete="name">
-          </div>
-
-          <!-- Email -->
-          <div>
-            <label for="contact-email" class="block text-sm font-semibold text-ink mb-2">Correo electrónico</label>
-            <input type="email" id="contact-email" name="email" required placeholder="tuemail@ejemplo.com" class="glass-input" autocomplete="email">
-          </div>
-
-          <!-- Mensaje -->
-          <div>
-            <label for="contact-message" class="block text-sm font-semibold text-ink mb-2">Mensaje</label>
-            <textarea id="contact-message" name="message" rows="4" required placeholder="Cuéntame sobre tu proyecto o consulta..." class="glass-input resize-y"></textarea>
-          </div>
-
-          <!-- Botón de envío Pill primario -->
-          <div class="pt-2">
-            <button type="submit" class="btn-pill btn-primary shadow-sm w-full sm:w-auto" aria-label="Enviar mensaje del formulario">
-              Enviar mensaje
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Fila de botones pill .glass para redes/contacto -->
-      <div class="flex flex-wrap items-center justify-center gap-4 max-w-xl mx-auto mb-16 reveal" style="--stagger: 1">
-        <a href="#" class="btn-pill glass text-sm font-medium gap-2" aria-label="Visitar perfil de GitHub de Jeshua Useche">
-          <i data-lucide="github" class="w-4 h-4 text-pastel-deep" aria-hidden="true"></i>
-          GitHub
-        </a>
-        <a href="#" class="btn-pill glass text-sm font-medium gap-2" aria-label="Visitar perfil de LinkedIn de Jeshua Useche">
-          <i data-lucide="linkedin" class="w-4 h-4 text-pastel-deep" aria-hidden="true"></i>
-          LinkedIn
-        </a>
-        <a href="#" class="btn-pill glass text-sm font-medium gap-2" aria-label="Enviar correo electrónico directo a Jeshua Useche">
-          <i data-lucide="mail" class="w-4 h-4 text-pastel-deep" aria-hidden="true"></i>
-          Email
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Toast flotante en acabado .glass con animación fade+slide -->
-  <div id="toast" class="toast-glass hidden fixed bottom-8 right-6 z-50 glass px-6 py-4 rounded-full flex items-center gap-3 shadow-xl border border-[rgba(255,255,255,0.7)] pointer-events-none" role="status" aria-live="polite">
-    <i data-lucide="check-circle-2" class="w-5 h-5 text-pastel-deep stroke-[2]" aria-hidden="true"></i>
-    <span class="text-sm font-semibold text-ink">¡Gracias por escribirme!</span>
+  <!-- ░░ MALLA DE GRADIENTE LÍQUIDO (fondo) ░░ -->
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="mesh-orb mesh-orb--1"></div>
+    <div class="mesh-orb mesh-orb--2"></div>
+    <div class="mesh-orb mesh-orb--3"></div>
+    <div class="mesh-orb mesh-orb--4"></div>
+    <div class="mesh-orb mesh-orb--5"></div>
   </div>
 
-  <!-- Footer simple -->
-  <footer class="py-8 border-t border-[rgba(29,29,31,0.08)] text-center text-sm text-ink-soft">
-    <p>© 2026 Jeshua Useche — Hecho con HTML, CSS, JS y Tailwind</p>
+  <!-- ░░ NAVBAR — Dynamic Island píldora ░░ -->
+  <header class="site-header" role="banner">
+    <nav id="main-nav" class="nav-pill glass" aria-label="Navegación principal">
+      <a href="#inicio" class="nav-brand" aria-label="Ir al inicio">JU</a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#sobre-mi" class="nav-link">Sobre mí</a></li>
+        <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+        <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+
+      <a href="#contacto" class="nav-cta btn-primary" aria-label="Contactar a Jeshua">
+        Hablemos
+      </a>
+
+      <button id="menu-btn" class="hamburger" type="button" aria-label="Abrir menú" aria-expanded="false"
+        aria-controls="mobile-menu">
+        <span class="hbar"></span>
+        <span class="hbar"></span>
+        <span class="hbar"></span>
+      </button>
+    </nav>
+
+    <!-- Menú mobile -->
+    <div id="mobile-menu" class="mobile-menu glass" hidden>
+      <ul class="mobile-links" role="list">
+        <li><a href="#sobre-mi" class="mobile-link">Sobre mí</a></li>
+        <li><a href="#habilidades" class="mobile-link">Habilidades</a></li>
+        <li><a href="#proyectos" class="mobile-link">Proyectos</a></li>
+        <li><a href="#faq" class="mobile-link">FAQ</a></li>
+        <li><a href="#contacto" class="mobile-link">Contacto</a></li>
+      </ul>
+      <a href="#contacto" class="btn-primary mobile-cta">Hablemos →</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ░░ HERO ░░ -->
+    <section id="inicio" class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+
+
+
+        <h1 id="hero-title" class="hero-name reveal">
+          Jeshua<br>
+          <span class="hero-name-gradient">Useche.</span>
+        </h1>
+
+        <p class="hero-role reveal">Desarrollador Junior Fullstack &middot; 18 años</p>
+
+        <p class="hero-copy reveal">
+
+          Escribiendo código, diseñando experiencias<br>
+          y construyendo el futuro, línea por línea.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a href="#proyectos" class="btn-primary btn-lg">
+            <i data-lucide="folder-open" aria-hidden="true"></i>
+            Ver proyectos
+          </a>
+          <a href="#contacto" class="btn-ghost btn-lg">
+            <i data-lucide="mail" aria-hidden="true"></i>
+            Contáctame
+          </a>
+        </div>
+
+        <!-- Stats pill -->
+        <div class="hero-stats glass reveal" aria-label="Estadísticas">
+          <div class="stat">
+            <span class="stat-n">5+</span>
+            <span class="stat-l">Proyectos reales</span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat-n">2+</span>
+            <span class="stat-l">Años de desarrollo</span>
+          </div>
+          <div class="stat-sep" aria-hidden="true"></div>
+          <div class="stat">
+            <span class="stat-n">🏆</span>
+            <span class="stat-l">Selección Samsung Chile</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-dot"></div>
+      </div>
+    </section>
+
+    <!-- ░░ SOBRE MÍ — Bento Grid ░░ -->
+    <section id="sobre-mi" class="section" aria-labelledby="sobre-title">
+      <div class="container">
+
+        <header class="section-header reveal">
+          <span class="eyebrow">Sobre mí</span>
+          <h2 id="sobre-title" class="section-title">Quién soy.</h2>
+        </header>
+
+        <div class="bento" role="list">
+
+          <!-- Card 1: Trayectoria -->
+          <article class="bento-card bento-card--wide glass reveal" style="--i:0" role="listitem"
+            aria-labelledby="bc-tray">
+            <div class="bento-icon-wrap" aria-hidden="true">
+              <i data-lucide="flame"></i>
+            </div>
+            <h3 id="bc-tray" class="bento-h">Forjado en la disciplina.</h3>
+            <p class="bento-p">
+              Desde los 12 años hasta la actualidad sigo trabajando en el mismo negocio familiar que fundamos con mucho
+              trabajo y esfuerzo, esfuerzo que sigo desarrollando y
+              y implementando en mis proyectos tanto personales como los de mi empresa "S&M Company"
+            </p>
+
+        </div>
+        </article>
+
+        <!-- Card 2: Actualidad -->
+        <article class="bento-card glass reveal" style="--i:1" role="listitem" aria-labelledby="bc-act">
+          <div class="bento-icon-wrap" aria-hidden="true">
+            <i data-lucide="graduation-cap"></i>
+          </div>
+          <h3 id="bc-act" class="bento-h">Hoy.</h3>
+          <p class="bento-p">
+            Cursando <strong>4° Año Medio</strong>. Esforzandome dia a dia por destacar en lo que amo hacer, buscando
+            aprender dia a dia y sin dejar de ser quien soy y sin dejar
+            las ganas de aprender y ser mejor, alternando mi aprendizaje con mis 2 trabajos en palalelo.
+          </p>
+          <div class="bento-tags">
+            <span class="liquid-tag">📚 4° Medio</span>
+            <span class="liquid-tag">🏢 2 Trabajos</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Intereses -->
+        <article class="bento-card glass reveal" style="--i:2" role="listitem" aria-labelledby="bc-int">
+          <div class="bento-icon-wrap" aria-hidden="true">
+            <i data-lucide="heart"></i>
+          </div>
+          <h3 id="bc-int" class="bento-h">Fuera del código.</h3>
+          <ul class="bento-list" role="list">
+            <li><i data-lucide="utensils" aria-hidden="true"></i>Gastronomía por pasion</li>
+            <li><i data-lucide="leaf" aria-hidden="true"></i>Videojuegos</li>
+            <li><i data-lucide="music-2" aria-hidden="true"></i>Melomano</li>
+            <li><i data-lucide="trophy" aria-hidden="true"></i>Tácticas LaLiga Fantasy</li>
+            <li><i data-lucide="box" aria-hidden="true"></i>Formula 1</li>
+          </ul>
+        </article>
+
+        <!-- Card 4: Visión — Liquid Gradient destacado -->
+        <article class="bento-card bento-card--vision glass reveal" style="--i:3" role="listitem"
+          aria-labelledby="bc-vis">
+          <div class="bento-icon-wrap" aria-hidden="true">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <h3 id="bc-vis" class="bento-h">Próximo horizonte.</h3>
+          <p class="bento-p">
+            El siguiente capítulo tiene nombre: <strong>Ciberseguridad</strong>. La intersección entre sistemas
+            seguros, lógica adversarial y protección de datos. El camino natural para quien ya construye lo que pronto
+            querrá proteger.
+          </p>
+          <div class="bento-tags">
+            <span class="liquid-tag liquid-tag--accent">🔐 Ciberseguridad</span>
+            <span class="liquid-tag liquid-tag--accent">Estudios superiores</span>
+          </div>
+          <!-- Glow interior animado -->
+          <div class="card-glow" aria-hidden="true"></div>
+        </article>
+
+      </div>
+      </div>
+    </section>
+
+    <!-- ░░ HABILIDADES ░░ -->
+    <section id="habilidades" class="section" aria-labelledby="hab-title">
+      <div class="container">
+
+        <header class="section-header reveal">
+          <span class="eyebrow">Habilidades</span>
+          <h2 id="hab-title" class="section-title">El stack.</h2>
+          <p class="section-sub">Nivel Junior con transparencia radical. Las métricas reflejan progreso real.</p>
+        </header>
+
+        <div class="skills-layout">
+
+          <!-- Spec Sheet: Stack Tecnológico -->
+          <div class="skill-panel glass reveal" style="--i:0">
+            <h3 class="skill-panel-title">
+              <i data-lucide="layers" aria-hidden="true"></i>
+              Stack Tecnológico
+            </h3>
+            <ul class="skill-list" role="list" aria-label="Stack tecnológico">
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Next.js</span>
+                  <span class="skill-pct">75%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="Next.js 75%">
+                  <div class="skill-fill" data-w="75%"></div>
+                </div>
+
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">TypeScript</span>
+                  <span class="skill-pct">65%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="TypeScript 65%">
+                  <div class="skill-fill" data-w="65%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Tailwind CSS</span>
+                  <span class="skill-pct">82%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="Tailwind CSS 82%">
+                  <div class="skill-fill" data-w="82%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">SQLite</span>
+                  <span class="skill-pct">70%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="SQLite y Turso 70%">
+                  <div class="skill-fill" data-w="70%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Drizzle ORM</span>
+                  <span class="skill-pct">30%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="Drizzle ORM 30%">
+                  <div class="skill-fill" data-w="30%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Clerk Auth</span>
+                  <span class="skill-pct">20%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="Clerk 20%">
+                  <div class="skill-fill" data-w="20%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Vercel</span>
+                  <span class="skill-pct">80%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="Vercel 80%">
+                  <div class="skill-fill" data-w="80%"></div>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+
+          <!-- Spec Sheet: Entorno -->
+          <div class="skill-panel glass reveal" style="--i:1">
+            <h3 class="skill-panel-title">
+              <i data-lucide="monitor" aria-hidden="true"></i>
+              Entorno de trabajo
+            </h3>
+            <ul class="skill-list" role="list" aria-label="Entorno de trabajo">
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Google Antigravity IDE</span>
+                  <span class="skill-pct">85%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="Google Antigravity IDE 85%">
+                  <div class="skill-fill" data-w="85%"></div>
+                </div>
+
+              </li>
+
+
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Google AI Studio</span>
+                  <span class="skill-pct">78%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="Google AI Studio 78%">
+                  <div class="skill-fill" data-w="78%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Git / GitHub</span>
+                  <span class="skill-pct">80%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                  aria-label="Git y GitHub 80%">
+                  <div class="skill-fill" data-w="80%"></div>
+                </div>
+              </li>
+
+            </ul>
+
+            <!-- Liquid Tag cloud: tecnologías -->
+            <div class="tag-cloud" aria-label="Tecnologías del stack">
+              <span class="liquid-tag">Supabase</span>
+              <span class="liquid-tag">React</span>
+              <span class="liquid-tag">TypeScript</span>
+              <span class="liquid-tag">Tailwind</span>
+              <span class="liquid-tag">SQLite</span>
+              <span class="liquid-tag">Turso</span>
+              <span class="liquid-tag">Drizzle ORM</span>
+              <span class="liquid-tag">Clerk</span>
+              <span class="liquid-tag">Vercel</span>
+            </div>
+          </div>
+
+          <!-- Spec Sheet: Habilidades Blandas -->
+          <div class="skill-panel glass reveal" style="--i:2">
+            <h3 class="skill-panel-title">
+              <i data-lucide="users" aria-hidden="true"></i>
+              Habilidades Blandas
+            </h3>
+            <ul class="skill-list" role="list" aria-label="Habilidades Blandas">
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Comunicación Efectiva</span>
+                  <span class="skill-pct">95%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Comunicación Efectiva 95%">
+                  <div class="skill-fill" data-w="95%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Trabajo en Equipo</span>
+                  <span class="skill-pct">90%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Trabajo en Equipo 90%">
+                  <div class="skill-fill" data-w="90%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Resolución de Problemas</span>
+                  <span class="skill-pct">85%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Resolución de Problemas 85%">
+                  <div class="skill-fill" data-w="85%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Liderazgo</span>
+                  <span class="skill-pct">80%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Liderazgo 80%">
+                  <div class="skill-fill" data-w="80%"></div>
+                </div>
+              </li>
+
+              <li class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name">Adaptabilidad</span>
+                  <span class="skill-pct">90%</span>
+                </div>
+                <div class="skill-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Adaptabilidad 90%">
+                  <div class="skill-fill" data-w="90%"></div>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ PROYECTOS — Product Cards ░░ -->
+    <section id="proyectos" class="section" aria-labelledby="proj-title">
+      <div class="container">
+
+        <header class="section-header reveal">
+          <span class="eyebrow">Proyectos</span>
+          <h2 id="proj-title" class="section-title">Trabajo real.</h2>
+          <p class="section-sub">Iniciativas propias, clientes y proyectos de investigación aplicada.</p>
+        </header>
+
+        <div class="proj-grid">
+
+          <!-- P1 -->
+          <article class="proj-card glass reveal" style="--i:0" aria-labelledby="p-sm">
+            <div class="proj-top">
+              <div class="proj-icon" aria-hidden="true"><i data-lucide="building-2"></i></div>
+              <span class="proj-type">Co-fundador · Lead Tech</span>
+            </div>
+            <h3 id="p-sm" class="proj-title">S&amp;M Network Company</h3>
+            <p class="proj-desc">
+              Agencia web para pymes co-fundada junto a Andri Manrrique. Desarrollamos soluciones digitales completas —
+              sitios transaccionales, catálogos y plataformas — para pequeños negocios en Santiago.
+            </p>
+            <div class="proj-foot">
+              <div class="proj-chips">
+                <span class="liquid-tag liquid-tag--sm">Next.js</span>
+                <span class="liquid-tag liquid-tag--sm">TypeScript</span>
+                <span class="liquid-tag liquid-tag--sm">Vercel</span>
+              </div>
+              <a href="https://github.com/m00nskluch" target="_blank" rel="noopener noreferrer" class="proj-link"
+                aria-label="Ver S&M Network en GitHub">
+                Ver <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- P2 -->
+          <article class="proj-card glass reveal" style="--i:1" aria-labelledby="p-ca">
+            <div class="proj-top">
+              <div class="proj-icon" aria-hidden="true"><i data-lucide="shopping-bag"></i></div>
+              <span class="proj-type">Catálogo Transaccional</span>
+            </div>
+            <h3 id="p-ca" class="proj-title">Comercial Alvarado</h3>
+            <p class="proj-desc">
+              Plataforma web transaccional con catálogo digital, gestión de inventario y experiencia de compra
+              optimizada, desarrollada bajo S&amp;M Network Company.
+            </p>
+            <div class="proj-foot">
+              <div class="proj-chips">
+                <span class="liquid-tag liquid-tag--sm">Turso</span>
+                <span class="liquid-tag liquid-tag--sm">Drizzle ORM</span>
+                <span class="liquid-tag liquid-tag--sm">UI/UX</span>
+              </div>
+              <a href="https://github.com/m00nskluch" target="_blank" rel="noopener noreferrer" class="proj-link"
+                aria-label="Ver Comercial Alvarado en GitHub">
+                Ver <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- P3 -->
+          <article class="proj-card glass reveal" style="--i:2" aria-labelledby="p-tl">
+            <div class="proj-top">
+              <div class="proj-icon" aria-hidden="true"><i data-lucide="utensils-crossed"></i></div>
+              <span class="proj-type">Cliente · Gastronomía</span>
+            </div>
+            <h3 id="p-tl" class="proj-title">Tía Luci</h3>
+            <p class="proj-desc">
+              Plataforma web gastronómica con diseño UI/UX a medida, adaptada a la identidad de marca del cliente, menú
+              digital accesible y flujo de reservas.
+            </p>
+            <div class="proj-foot">
+              <div class="proj-chips">
+                <span class="liquid-tag liquid-tag--sm">HTML/CSS</span>
+                <span class="liquid-tag liquid-tag--sm">Diseño de marca</span>
+              </div>
+              <a href="https://github.com/m00nskluch" target="_blank" rel="noopener noreferrer" class="proj-link"
+                aria-label="Ver Tía Luci en GitHub">
+                Ver <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- P4: Destacado -->
+          <article class="proj-card proj-card--featured glass reveal" style="--i:3" aria-labelledby="p-ss">
+            <div class="proj-badge">🏆 Selección Nacional</div>
+            <div class="proj-top">
+              <div class="proj-icon" aria-hidden="true"><i data-lucide="map-pin"></i></div>
+              <span class="proj-type">Samsung Solve for Tomorrow Chile</span>
+            </div>
+            <h3 id="p-ss" class="proj-title">Mapeo Sensorial Comunitario</h3>
+            <p class="proj-desc">
+              Proyecto seleccionado a nivel nacional. Solución de mapeo sensorial desarrollada en equipo: tecnología al
+              servicio de personas reales con impacto comunitario medible.
+            </p>
+            <div class="proj-foot">
+              <div class="proj-chips">
+                <span class="liquid-tag liquid-tag--sm">Innovación</span>
+                <span class="liquid-tag liquid-tag--sm">Social Tech</span>
+                <span class="liquid-tag liquid-tag--sm">Investigación</span>
+              </div>
+              <a href="https://github.com/m00nskluch" target="_blank" rel="noopener noreferrer" class="proj-link"
+                aria-label="Ver Mapeo Sensorial en GitHub">
+                Ver <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div class="card-glow" aria-hidden="true"></div>
+          </article>
+
+
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ FAQ — Acordeón Spring ░░ -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container">
+
+        <header class="section-header reveal">
+          <span class="eyebrow">Preguntas frecuentes</span>
+          <h2 id="faq-title" class="section-title">Lo que más me preguntan.</h2>
+        </header>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item glass reveal" style="--i:0" role="listitem">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="fa1" id="fq1">
+              <span class="faq-q">¿Realizas proyectos para pymes?</span>
+              <span class="faq-icon" aria-hidden="true"><i data-lucide="chevron-down"></i></span>
+            </button>
+            <div id="fa1" class="faq-panel" role="region" aria-labelledby="fq1">
+              <div class="faq-body">
+                Sí. A través de <strong>S&amp;M Network Company</strong>, mi agencia, desarrollo soluciones digitales a
+                medida: sitios transaccionales, catálogos y plataformas. Proyectos como Comercial Alvarado y Tía Luci
+                son ejemplos reales de ese trabajo.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item glass reveal" style="--i:1" role="listitem">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">
+              <span class="faq-q">¿Qué stack utilizas para desarrollar?</span>
+              <span class="faq-icon" aria-hidden="true"><i data-lucide="chevron-down"></i></span>
+            </button>
+            <div id="fa2" class="faq-panel" role="region" aria-labelledby="fq2">
+              <div class="faq-body">
+                Trabajo con el ecosistema de <strong>React (Next.js)</strong>, bases de datos edge como <strong>Turso y
+                  SQLite</strong> con Drizzle ORM, <strong>Tailwind CSS</strong> para el diseño y <strong>Clerk</strong>
+                para autenticación. Deploys en Vercel.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item glass reveal" style="--i:2" role="listitem">
+            <button class="faq-btn" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">
+              <span class="faq-q">¿Cuáles son tus próximos pasos?</span>
+              <span class="faq-icon" aria-hidden="true"><i data-lucide="chevron-down"></i></span>
+            </button>
+            <div id="fa3" class="faq-panel" role="region" aria-labelledby="fq3">
+              <div class="faq-body">
+                Seguir perfeccionando mis habilidades Fullstack y especializarme en <strong>Ciberseguridad</strong> a
+                nivel superior. El análisis de vulnerabilidades y la protección de sistemas son el camino natural desde
+                el desarrollo.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ CONTACTO ░░ -->
+    <section id="contacto" class="section" aria-labelledby="cont-title">
+      <div class="container">
+
+        <header class="section-header reveal">
+          <span class="eyebrow">Contacto</span>
+          <h2 id="cont-title" class="section-title">Iniciemos algo.</h2>
+          <p class="section-sub">Un proyecto, una idea, o simplemente una conversación sobre tecnología. Estoy
+            escuchando.</p>
+        </header>
+
+        <div class="contact-layout">
+
+          <div class="contact-form-wrap reveal" style="--i:0">
+            <form id="contact-form" action="https://formsubmit.co/urojeshua.16@gmail.com" method="POST"
+              class="contact-form glass" novalidate aria-label="Formulario de contacto">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
+
+              <div class="field">
+                <label for="f-name" class="field-lbl">Nombre</label>
+                <input type="text" id="f-name" name="name" class="field-ctrl" placeholder="Tu nombre completo" required
+                  autocomplete="name" aria-required="true">
+              </div>
+
+              <div class="field">
+                <label for="f-email" class="field-lbl">Correo</label>
+                <input type="email" id="f-email" name="email" class="field-ctrl" placeholder="tu@correo.com" required
+                  autocomplete="email" aria-required="true">
+              </div>
+
+              <div class="field">
+                <label for="f-msg" class="field-lbl">Mensaje</label>
+                <textarea id="f-msg" name="message" class="field-ctrl field-area" rows="5"
+                  placeholder="Cuéntame sobre tu proyecto..." required aria-required="true"></textarea>
+              </div>
+
+              <button type="submit" id="contact-submit" class="btn-primary btn-submit">
+                <i data-lucide="send" aria-hidden="true"></i>
+                Enviar mensaje
+              </button>
+            </form>
+          </div>
+
+          <aside class="contact-side reveal" style="--i:1" aria-label="Redes y contacto directo">
+            <div class="clinks glass">
+              <h3 class="clinks-title">También aquí</h3>
+              <ul class="clink-list" role="list">
+
+                <li>
+                  <a href="https://github.com/folbox702" target="_blank" rel="noopener noreferrer" class="clink"
+                    id="clink-gh1" aria-label="GitHub personal de Jeshua">
+                    <span class="clink-ico" aria-hidden="true"><i data-lucide="github"></i></span>
+                    <div class="clink-txt">
+                      <span class="clink-lbl">GitHub personal</span>
+                      <span class="clink-val">@folbox702</span>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="clink-arrow" aria-hidden="true"></i>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://github.com/m00nskluch" target="_blank" rel="noopener noreferrer" class="clink"
+                    id="clink-gh2" aria-label="GitHub de S&M Network">
+                    <span class="clink-ico" aria-hidden="true"><i data-lucide="github"></i></span>
+                    <div class="clink-txt">
+                      <span class="clink-lbl">GitHub · Organización</span>
+                      <span class="clink-val">@m00nskluch</span>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="clink-arrow" aria-hidden="true"></i>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="mailto:urojeshua.16@gmail.com" class="clink" id="clink-mail" aria-label="Email directo">
+                    <span class="clink-ico" aria-hidden="true"><i data-lucide="mail"></i></span>
+                    <div class="clink-txt">
+                      <span class="clink-lbl">Email directo</span>
+                      <span class="clink-val">urojeshua.16@gmail.com</span>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="clink-arrow" aria-hidden="true"></i>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="clink"
+                    id="clink-li" aria-label="LinkedIn de Jeshua Useche">
+                    <span class="clink-ico" aria-hidden="true"><i data-lucide="linkedin"></i></span>
+                    <div class="clink-txt">
+                      <span class="clink-lbl">LinkedIn</span>
+                      <span class="clink-val">Jeshua Useche</span>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="clink-arrow" aria-hidden="true"></i>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p class="footer-copy">
+        &copy; 2026 <span>Jeshua Skiold Useche Rodriguez</span>
+        &mdash; HTML, CSS &amp; JavaScript puro
+      </p>
+      <div class="footer-links">
+        <a href="https://github.com/folbox702" target="_blank" rel="noopener noreferrer" class="footer-ico"
+          aria-label="GitHub">
+          <i data-lucide="github" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:urojeshua.16@gmail.com" class="footer-ico" aria-label="Email">
+          <i data-lucide="mail" aria-hidden="true"></i>
+        </a>
+        <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" class="footer-ico"
+          aria-label="LinkedIn">
+          <i data-lucide="linkedin" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
   </footer>
 
-  <!-- Script principal con defer -->
+  <!-- Toast -->
+  <div id="toast" class="toast glass" role="status" aria-live="polite" aria-atomic="true" hidden>
+    <i data-lucide="check-circle-2" aria-hidden="true"></i>
+    <span>Mensaje enviado. Te respondo pronto.</span>
+  </div>
+
   <script src="js/script.js" defer></script>
 </body>
+
 </html>
